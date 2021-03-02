@@ -1,0 +1,11 @@
+
+porosity = porosityModel3D
+$(porosity)/porosityModel/porosityModel3D.C
+$(porosity)/porosityModel/porosityModelNew3D.C
+$(porosity)/porosityModel/porosityModelList3D.C
+$(porosity)/porosityModel/IOporosityModelList3D.C
+$(porosity)/myDarcy/myDarcy.C
+
+
+
+LIB = $(FOAM_USER_LIBBIN)/libPorosity3D
