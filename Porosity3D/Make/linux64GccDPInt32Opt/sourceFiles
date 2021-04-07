@@ -1,6 +1,0 @@
-SOURCE = \
-$(porosity)/porosityModel/porosityModel3D.C \
-$(porosity)/porosityModel/porosityModelNew3D.C \
-$(porosity)/porosityModel/porosityModelList3D.C \
-$(porosity)/porosityModel/IOporosityModelList3D.C \
-$(porosity)/myDarcy/myDarcy.C 

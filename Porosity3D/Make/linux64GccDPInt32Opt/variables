@@ -1,2 +1,0 @@
-porosity = porosityModel3D
-LIB = $(FOAM_USER_LIBBIN)/libPorosity3D
