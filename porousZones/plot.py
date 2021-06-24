@@ -1,5 +1,5 @@
 import plotly.graph_objects as go
-
+import pandas as pd
 
 def plot_forces(title, forces_dict):
     fig = go.Figure()

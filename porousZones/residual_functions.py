@@ -2,7 +2,7 @@ import numpy as np
 from porousZones.analytical import inflow_uvw, compute_forces_xy, compute_force_z
 
 
-def residuals_function(f_opt, alpha, f, u_mag, rho, porous_dims, weights):
+def residuals_function(f_opt, f, alpha, u_mag, rho, porous_dims, weights):
 
     u0, v0 = inflow_uvw(u_mag, alpha, 90)[0:2]
     fx, fy = compute_forces_xy(porous_dims, rho, u0, v0, np.array([[f_opt[0], f_opt[1], 0],
