@@ -10,7 +10,8 @@ porous_dimensions = [0.2, 0.0842527, 0.25]
 
 f_ij = np.array([[134.2093102, -125.64895069, 0], [-101.56379806, 95.26388569, 0], [0, 0, 1.04757228]])
 
-psi = np.array([-80, -60, -40, -20, 1E-6, 20, 40, 60, 80])
+psi_train = np.array([-80, -60, -40, -20, 1E-6, 20, 40, 60, 80])
+psi = np.linspace(-90, 90, 181)
 theta = np.array([10, 30, 50, 70, 89.999999, 110, 130, 150, 170])
 psi_c2 = np.rad2deg(alpha_v_const(f_ij[1, 1], f_ij[1, 0]))
 print(psi_c2)
@@ -32,16 +33,29 @@ fz_a = compute_force_z(porous_dimensions, rho, u0, v0, w0, f_ij)
 # Read porous CFD data
 porous_cfd = pd.read_csv("psi_sweep_results_extended_mesh.csv", comment='#')
 porous_cfd_2 = pd.read_csv("theta_sweep_results_extended_mesh.csv", comment='#')
-
+porous_cfd_3 = pd.read_csv("psi_sweep_results_extended_mesh_FLUENT.csv", comment='#')
+porous_cfd_4 = pd.read_csv("theta_sweep_results_extended_mesh_FLUENT.csv", comment='#')
 
 # Do some Plotting
-fx_to_plot = {"HiFidelity CFD": [psi, fx_train], "2D Analytical": [psi, fx_a],
-              "3D Porous CFD": [porous_cfd['Psi'], porous_cfd['Fx']]}
-fy_to_plot = {"HiFidelity CFD": [psi, fy_train], "2D Analytical": [psi, fy_a],
-              "3D Porous CFD": [porous_cfd['Psi'], porous_cfd['Fy']]}
-fz_to_plot = {"HiFidelity CFD": [theta, fz_train], "2D Analytical": [theta, fz_a],
+fx_to_plot = {"HiFidelity CFD": [psi_train, fx_train],
+              "2D Analytical": [psi, fx_a],
+              "3D Porous CFD OpenFOAM": [porous_cfd['Psi'], porous_cfd['Fx']],
+              "3D Porous CFD FLUENT": [porous_cfd_3['Psi'], porous_cfd_3['Fx']]}
+fy_to_plot = {"HiFidelity CFD": [psi_train, fy_train],
+              "2D Analytical": [psi, fy_a],
+              "3D Porous CFD OpenFOAM": [porous_cfd['Psi'], porous_cfd['Fy']],
+              "3D Porous CFD FLUENT": [porous_cfd_3['Psi'], porous_cfd_3['Fy']]}
+fz_to_plot = {"HiFidelity CFD": [theta, fz_train],
+              "2D Analytical": [theta, fz_a],
               "3D Porous CFD": [porous_cfd_2['Theta'], porous_cfd_2['Fz']]}
+
+case_2_to_plot = {"HiFidelity CFD": [theta, fz_train],
+                  "Fz - 2D Analytical": [theta, fz_a],
+                  "Fz - 3D Porous CFD OpenFOAM": [porous_cfd_2['Theta'], porous_cfd_2['Fz']],
+                  "Fz - 3D Porous CFD FLUENT": [porous_cfd_4['Theta'], porous_cfd_4['Fz']]}
 
 plot_forces("Fx", fx_to_plot)
 plot_forces("Fy", fy_to_plot)
 plot_forces("Fz", fz_to_plot)
+
+plot_forces("Case 2", case_2_to_plot)
