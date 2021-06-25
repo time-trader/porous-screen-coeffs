@@ -1,3 +1,5 @@
+# Non diagonal resistance matrix benchmark, psi sweep
+# Coarse mesh, Gauss linear interpolation
 Psi,Fx,Fy
 -89,1.508834,-1.7784413602803149
 -88,3.006573,-3.620795341476873

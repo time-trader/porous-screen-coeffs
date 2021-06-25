@@ -1,3 +1,5 @@
+# Non diagonal resistance matrix benchmark, theta sweep
+# Coarse mesh, Gauss linear interpolation
 Theta,Fx,Fy,Fz
 5,-0.1008169,-1.8156645506742812e-05,5.206438579410274
 6,-0.1349461,-2.5503554240247084e-05,6.121664397027711

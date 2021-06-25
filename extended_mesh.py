@@ -21,17 +21,17 @@ fy_train = np.array([-0.67436, -2.10182, -3.16394, -3.41387, -2.72193, -1.42857,
 fz_train = np.array([0.097, 0.146, 0.137, 0.076, 0, -0.076, -0.137, -0.146, -0.097])
 
 
-#Case 1
+# Case 1
 u0, v0 = inflow_uvw(u_mag, psi, 90)[0:2]
-fx_a, fy_a = compute_forces_xy(porous_dimensions, rho, u0, v0,f_ij)
+fx_a, fy_a = compute_forces_xy(porous_dimensions, rho, u0, v0, f_ij)
 
-#Case 2
+# Case 2
 u0, v0, w0 = inflow_uvw(u_mag, psi_c2, theta)
 fz_a = compute_force_z(porous_dimensions, rho, u0, v0, w0, f_ij)
 
 # Read porous CFD data
-porous_cfd = pd.read_csv("psi_sweep_results_extended_mesh.csv")
-porous_cfd_2 = pd.read_csv("theta_sweep_results_extended_mesh.csv")
+porous_cfd = pd.read_csv("psi_sweep_results_extended_mesh.csv", comment='#')
+porous_cfd_2 = pd.read_csv("theta_sweep_results_extended_mesh.csv", comment='#')
 
 
 # Do some Plotting
