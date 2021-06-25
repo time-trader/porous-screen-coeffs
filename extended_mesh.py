@@ -30,26 +30,17 @@ u0, v0, w0 = inflow_uvw(u_mag, psi_c2, theta)
 fz_a = compute_force_z(porous_dimensions, rho, u0, v0, w0, f_ij)
 
 # Read porous CFD data
-porous_cfd=pd.read_csv("psi_sweep_results_extended_mesh", sep="[\s|\t|(|)]", header=None, engine="python")
-porous_cfd_2 = pd.read_csv("theta_sweep_results_extended_mesh", sep="[\s|\t|(|)]", header=None, engine="python")
-
-fy_porous = -(porous_cfd[6]/(porous_dimensions[1]*porous_dimensions[2]) -
-              u_mag*np.sin(np.deg2rad(porous_cfd[0])))\
-              *10*np.cos(np.deg2rad(porous_cfd[0]))*rho*(porous_dimensions[1]*porous_dimensions[2])
-
-fz_porous = -(porous_cfd_2[7] / (porous_dimensions[1] * porous_dimensions[2]) -
-              u_mag * np.cos(np.deg2rad(porous_cfd_2[0]))) \
-              *10*np.cos(np.deg2rad(psi_c2)) * np.sin(np.deg2rad(porous_cfd_2[0])) \
-              * rho * (porous_dimensions[1] * porous_dimensions[2])
+porous_cfd = pd.read_csv("psi_sweep_results_extended_mesh.csv")
+porous_cfd_2 = pd.read_csv("theta_sweep_results_extended_mesh.csv")
 
 
 # Do some Plotting
 fx_to_plot = {"HiFidelity CFD": [psi, fx_train], "2D Analytical": [psi, fx_a],
-              "3D Porous CFD": [porous_cfd[0], porous_cfd[2]]}
+              "3D Porous CFD": [porous_cfd['Psi'], porous_cfd['Fx']]}
 fy_to_plot = {"HiFidelity CFD": [psi, fy_train], "2D Analytical": [psi, fy_a],
-              "3D Porous CFD": [porous_cfd[0], fy_porous]}
+              "3D Porous CFD": [porous_cfd['Psi'], porous_cfd['Fy']]}
 fz_to_plot = {"HiFidelity CFD": [theta, fz_train], "2D Analytical": [theta, fz_a],
-              "3D Porous CFD": [porous_cfd_2[0], fz_porous]}
+              "3D Porous CFD": [porous_cfd_2['Theta'], porous_cfd_2['Fz']]}
 
 plot_forces("Fx", fx_to_plot)
 plot_forces("Fy", fy_to_plot)
