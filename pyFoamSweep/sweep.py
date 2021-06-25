@@ -31,9 +31,13 @@ sweep_results = dire.makeFile("sweep_results")
 sweep_results.writeLine("Psi", "Fx", "Fy", "Fz")
 
 for aoa in aoa_sweep:
-    Ux = np.cos(np.radians(aoa)) * u_mag
-    Uy = np.sin(np.radians(aoa)) * u_mag
-    u_initial.replaceInternal("(%f %f 0)" % (Ux, Uy))
+
+    psi = np.deg2rad(aoa)
+    theta = np.deg2rad(theta)
+
+    u_0 = [u_mag * np.cos(psi) * np.sin(theta), u_mag * np.sin(psi) * np.sin(theta), u_mag * np.cos(theta)]
+
+    u_initial.replaceInternal("(%f %f %f)" % (u_0[0], u_0[1], u_0[2]))
 
     # Run the solver
     run = ConvergenceRunner(BoundingLogAnalyzer(), argv=["myporousSimpleFoam", "-case", case], silent=True)
@@ -49,11 +53,6 @@ for aoa in aoa_sweep:
 
     # Parse velocity
     u_i = [float(x)/(porous_dimensions[1] * porous_dimensions[2]) for x in v_data.iloc[-1,1].strip('[(|)]').split()]
-
-    psi = np.deg2rad(aoa)
-    theta = np.deg2rad(theta)
-
-    u_0 = [u_mag * np.cos(psi) * np.sin(theta), u_mag * np.sin(psi) * np.sin(theta), u_mag * np.cos(theta)]
 
     # Dump forces csv
     f_x = p_data.iloc[-1, 1]
