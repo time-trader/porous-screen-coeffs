@@ -15,6 +15,7 @@ porous_dimensions = [0.5, 1, 1]
 
 aoa_sweep=[-80, -60, -40, -20, 0, 20, 40, 60, 80]
 theta=90
+theta = np.deg2rad(theta)
 
 case = os.curdir
 dire = SolutionDirectory(case, archive="AoA")
@@ -28,12 +29,11 @@ u_initial = SolutionFile(dire.initialDir(), "U")
 
 sweep_results = dire.makeFile("sweep_results")
 
-sweep_results.writeLine("Psi", "Fx", "Fy", "Fz")
+sweep_results.writeLine("Psi,Fx,Fy,Fz")
 
 for aoa in aoa_sweep:
 
     psi = np.deg2rad(aoa)
-    theta = np.deg2rad(theta)
 
     u_0 = [u_mag * np.cos(psi) * np.sin(theta), u_mag * np.sin(psi) * np.sin(theta), u_mag * np.cos(theta)]
 

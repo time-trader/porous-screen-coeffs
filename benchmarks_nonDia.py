@@ -24,10 +24,10 @@ u0, v0, w0 = inflow_uvw(u_mag, psi_c2, theta)
 fz_a = compute_force_z(porous_dimensions, rho, u0, v0, w0, f_ij)
 
 # Read sweep_results
-porous_cfd_1 = pd.read_csv("psi_sweep_results_benchmark.csv", comment='#')
+porous_cfd_1 = pd.read_csv("data/psi_sweep_results_benchmark.csv", comment='#')
 
 # Read sweep_results
-porous_cfd_2 = pd.read_csv("theta_sweep_results_benchmark.csv", comment='#')
+porous_cfd_2 = pd.read_csv("data/theta_sweep_results_benchmark.csv", comment='#')
 
 fx_to_plot = {"2D Analytical": [psi, fx_a], "3D Porous CFD": [porous_cfd_1['Psi'], porous_cfd_1['Fx']]}
 fy_to_plot = {"2D Analytical": [psi, fy_a], "3D Porous CFD": [porous_cfd_1['Psi'], porous_cfd_1['Fy']]}

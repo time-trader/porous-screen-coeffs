@@ -31,10 +31,10 @@ u0, v0, w0 = inflow_uvw(u_mag, psi_c2, theta)
 fz_a = compute_force_z(porous_dimensions, rho, u0, v0, w0, f_ij)
 
 # Read porous CFD data
-porous_cfd = pd.read_csv("psi_sweep_results_extended_mesh.csv", comment='#')
-porous_cfd_2 = pd.read_csv("theta_sweep_results_extended_mesh.csv", comment='#')
-porous_cfd_3 = pd.read_csv("psi_sweep_results_extended_mesh_FLUENT.csv", comment='#')
-porous_cfd_4 = pd.read_csv("theta_sweep_results_extended_mesh_FLUENT.csv", comment='#')
+porous_cfd = pd.read_csv("data/psi_sweep_results_extended_mesh.csv", comment='#')
+porous_cfd_2 = pd.read_csv("data/theta_sweep_results_extended_mesh.csv", comment='#')
+porous_cfd_3 = pd.read_csv("data/psi_sweep_results_extended_mesh_FLUENT.csv", comment='#')
+porous_cfd_4 = pd.read_csv("data/theta_sweep_results_extended_mesh_FLUENT.csv", comment='#')
 
 # Do some Plotting
 fx_to_plot = {"HiFidelity CFD": [psi_train, fx_train],
